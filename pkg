@@ -1,0 +1,81 @@
+#!/bin/sh
+
+print_help() {
+    echo "Usage: pkg FUNCTION [PKGNAME|FILE]\n"
+    echo "FUNCTIONS:"
+    echo " help       print this help message."
+    echo " install    install package with PKGNAME."
+    echo " remove     remove package with PKGNAME."
+    echo " search     search for PKGNAME in name/description."
+    echo " upgrade    upgrade PKGNAME or all packages."
+    echo " which      check to which package FILE belongs."
+    echo " hold       hold package with PKGNAME."
+    echo " unhold     unhold package with PKGNAME."
+}
+
+if [ $# -lt 1 ]; then
+    print_help
+    exit 0
+fi
+
+case "$1" in
+    help)
+        print_help
+        ;;
+    install)
+        shift; xbps-install -S $*
+        ;;
+    remove)
+        shift; xbps-remove $*
+        ;;
+    search)
+        shift; xbps-query -Rs $*
+        ;;
+    upgrade)
+        shift; xbps-install -Su $*
+        ;;
+    info)
+        shift; xbps-query $*
+        ;;
+    which)
+        shift; xbps-query -o $*
+        ;;
+    clean)
+        shift; xbps-remove -O $*
+        ;;
+    hold)
+        shift; xbps-pkgdb -m hold $*
+        ;;
+    unhold)
+        shift; xbps-pkgdb -m unhold $*
+        ;;
+    deps|dependencies|depends-on)
+        shift; xbps-query -Rx $*
+        ;;
+    revdeps|reverse-dependencies|required-by)
+        shift; xbps-query -RX $*
+        ;;
+    orphans)
+        shift; xbps-query -O $*
+        ;;
+    db)
+        shift; xbps-pkgdb $*
+        ;;
+    alternatives)
+        shift; xbps-alternatives $*
+        ;;
+    query)
+        shift; xbps-query $*
+        ;;
+    reconfigure)
+        shift; xbps-reconfigure $*
+        ;;
+    rindex)
+        shift; xbps-rindex $*
+        ;;
+    *)
+        echo "Unknown option: $*"
+        print_help
+        ;;
+esac
+
