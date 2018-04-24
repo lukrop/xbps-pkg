@@ -17,6 +17,7 @@ print_help() {
     echo " deps           list dependencies for package PKGNAME"
     echo " revdeps        list packages which need package PKGNAME."
     echo " orphans        list orphaned packages."
+    echo " "
     echo "WRAPPERS:"
     echo " db             calls xbps-pkgdb."
     echo " alternatives   calls xbps-alternatives."
