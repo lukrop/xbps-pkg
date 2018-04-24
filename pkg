@@ -36,58 +36,58 @@ case "$1" in
         print_help
         ;;
     install)
-        shift; xbps-install -S $*
+        shift; xbps-install -S "$*"
         ;;
     remove)
-        shift; xbps-remove $*
+        shift; xbps-remove "$*"
         ;;
     search)
-        shift; xbps-query -Rs $*
+        shift; xbps-query -Rs "$*"
         ;;
     upgrade)
-        shift; xbps-install -Su $*
+        shift; xbps-install -Su "$*"
         ;;
     info)
-        shift; xbps-query $*
+        shift; xbps-query "$*"
         ;;
     which)
-        shift; xbps-query -o $*
+        shift; xbps-query -o "$*"
         ;;
     files)
-        shift; xbps-query -f $*
+        shift; xbps-query -f "$*"
         ;;
     clean)
-        shift; xbps-remove -O $*
+        shift; xbps-remove -O "$*"
         ;;
     hold)
-        shift; xbps-pkgdb -m hold $*
+        shift; xbps-pkgdb -m hold "$*"
         ;;
     unhold)
-        shift; xbps-pkgdb -m unhold $*
+        shift; xbps-pkgdb -m unhold "$*"
         ;;
     deps|dependencies|depends-on)
-        shift; xbps-query -Rx $*
+        shift; xbps-query -Rx "$*"
         ;;
     revdeps|reverse-dependencies|required-by)
-        shift; xbps-query -RX $*
+        shift; xbps-query -RX "$*"
         ;;
     orphans)
-        shift; xbps-query -O $*
+        shift; xbps-query -O "$*"
         ;;
     db)
-        shift; xbps-pkgdb $*
+        shift; xbps-pkgdb "$*"
         ;;
     alternatives)
-        shift; xbps-alternatives $*
+        shift; xbps-alternatives "$*"
         ;;
     query)
-        shift; xbps-query $*
+        shift; xbps-query "$*"
         ;;
     reconfigure)
-        shift; xbps-reconfigure $*
+        shift; xbps-reconfigure "$*"
         ;;
     rindex)
-        shift; xbps-rindex $*
+        shift; xbps-rindex "$*"
         ;;
     *)
         echo "Unknown option: $*"
