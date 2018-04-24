@@ -1,0 +1,46 @@
+#compdef pkg
+
+#local context curcontext="$curcontext" state line
+local -a _pkg_subcommands
+_pkg_subcommands() {
+    local commands;
+    commands=( 'help:print help message.' 
+        'install:install package' 
+        'remove:remove package'
+        'search:search package'
+        'upgrade:upgrade single package or all packages'
+        'info:show information for package'
+        'which:check to which package a file belongs'
+        'files:list files contained in package'
+        'clean:remove obsolete packages from package cache'
+        'hold:hold package'
+        'unhold:unhold package'
+        'deps:list dependencies for package'
+        'revdeps:list packages which need package'
+        'orphans:list orphaned packages'
+        'db:calls xbps-pkgdb'
+        'alternatives:calls xbps-alternatives'
+        'query:calls xbps-query'
+        'reconfigure:calls xbps-reconfigure'
+        'rindex:calls xbps-rindex'
+    )
+
+    _describe -t commands 'pkg command' commands "$@"
+}
+
+#_all_pkgs() {
+#    xpkg -a
+#}
+
+_arguments -C \
+    '1: :_pkg_subcommands' \
+    '*::arg:->args' \
+    && return 0
+
+#case $state in
+#    (args)
+#        case $line[1] in
+#            (install|search|info|deps|revdeps)
+#                _arguments '1:: :_all_pkgs' && ret=0
+#        esac
+#esac
