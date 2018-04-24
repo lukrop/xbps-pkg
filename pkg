@@ -1,16 +1,28 @@
 #!/bin/sh
 
 print_help() {
-    echo "Usage: pkg FUNCTION [PKGNAME|FILE]\n"
-    echo "FUNCTIONS:"
-    echo " help       print this help message."
-    echo " install    install package with PKGNAME."
-    echo " remove     remove package with PKGNAME."
-    echo " search     search for PKGNAME in name/description."
-    echo " upgrade    upgrade PKGNAME or all packages."
-    echo " which      check to which package FILE belongs."
-    echo " hold       hold package with PKGNAME."
-    echo " unhold     unhold package with PKGNAME."
+    echo "Usage: pkg ACTION|WRAPPER [PKGNAME|FILE]\n"
+    echo "ACTIONS:"
+    echo " help           print this help message."
+    echo " install        install package with PKGNAME."
+    echo " remove         remove package with PKGNAME."
+    echo " search         search for PKGNAME in name/description."
+    echo " upgrade        upgrade PKGNAME or all packages."
+    echo " info           show information for package PKGNAME."
+    echo " which          check to which package FILE belongs."
+    echo " files          list files contained in package PKGNAME."
+    echo " clean          remove obsolete packages from package cache."
+    echo " hold           hold package with PKGNAME."
+    echo " unhold         unhold package with PKGNAME."
+    echo " deps           list dependencies for package PKGNAME"
+    echo " revdeps        list packages which need package PKGNAME."
+    echo " orphans        list orphaned packages."
+    echo "WRAPPERS:"
+    echo " db             calls xbps-pkgdb."
+    echo " alternatives   calls xbps-alternatives."
+    echo " query          calls xbps-query."
+    echo " reconfigure    calls xbps-reconfigure."
+    echo " rindex         calls xbps-rindex."
 }
 
 if [ $# -lt 1 ]; then
@@ -39,6 +51,9 @@ case "$1" in
         ;;
     which)
         shift; xbps-query -o $*
+        ;;
+    files)
+        shift; xbps-query -f $*
         ;;
     clean)
         shift; xbps-remove -O $*
